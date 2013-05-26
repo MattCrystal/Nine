@@ -594,7 +594,7 @@ DEFINE_SIMPLE_ATTRIBUTE(reg_fops, get_reg, set_reg, "0x%02llx\n");
 
 static int get_calc(void *data, u64 * val)
 {
-	int ibat = 0, rc;
+	int ibat, rc;
 
 	rc = pm8xxx_ccadc_get_battery_current(&ibat);
 	*val = ibat;
@@ -604,7 +604,7 @@ DEFINE_SIMPLE_ATTRIBUTE(calc_fops, get_calc, NULL, "%lld\n");
 
 void dump_all(void)
 {
-	u64 val  = 0;
+	u64 val;
 	get_reg((void *)CCADC_ANA_PARAM, &val);
 	pr_info("CCADC_ANA_PARAM = 0x%02llx\n", val);
 	get_reg((void *)CCADC_DIG_PARAM, &val);

@@ -512,10 +512,11 @@ SendReceive2(const unsigned int xid, struct cifs_ses *ses,
 {
 	int rc = 0;
 	int long_op;
-
-	struct mid_q_entry *midQ =0;
+	struct mid_q_entry *midQ;
 	char *buf = iov[0].iov_base;
+
 	long_op = flags & CIFS_TIMEOUT_MASK;
+
 	*pRespBufType = CIFS_NO_BUFFER;  
 
 	if ((ses == NULL) || (ses->server == NULL)) {

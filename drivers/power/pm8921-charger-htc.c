@@ -2788,7 +2788,7 @@ finish_due_to_no_cable:
 
 static int find_usb_ma_value(int value)
 {
-	int i = 0;
+	int i;
 
 	for (i = ARRAY_SIZE(usb_ma_table) - 1; i >= 0; i--) {
 		if (value >= usb_ma_table[i].usb_ma)
@@ -3095,7 +3095,7 @@ static void unplug_check_worker(struct work_struct *work)
 	struct pm8921_chg_chip *chip = container_of(dwork,
 				struct pm8921_chg_chip, unplug_check_work);
 	u8 reg_loop, active_path;
-	int rc, ibat, active_chg_plugged_in, usb_ma = 0;
+	int rc, ibat, active_chg_plugged_in, usb_ma;
 	int chg_gone = 0;
 	static int rb_trial_count = 0;
 	static int ovp_trial_count = 0;
@@ -3508,7 +3508,7 @@ static void dump_irq_rt_status(void)
 
 static void dump_reg(void)
 {
-	u64 val = 0;
+	u64 val;
 
 	get_reg((void *)CHG_CNTRL, &val);
 	pr_info("CHG_CNTRL = 0x%llx\n", val);
@@ -5017,7 +5017,7 @@ static const struct dev_pm_ops pm8921_charger_pm_ops = {
 
 static void ext_charger_vbat_low_handler(struct work_struct *w)
 {
-	int result = 0;
+	int result;
 
 	pm8921_get_batt_voltage(&result);
 
@@ -5046,7 +5046,7 @@ static void ext_charger_vbat_low_handler(struct work_struct *w)
 
 static void ext_charger_chgdone_handler(struct work_struct *w)
 {
-	int result = 0;
+	int result;
 
 	pm8921_get_batt_voltage(&result);
 

@@ -532,7 +532,7 @@ static void rmnet_function_cleanup(struct android_usb_function *f)
 static int rmnet_function_bind_config(struct android_usb_function *f,
 					 struct usb_configuration *c)
 {
-	int i, err = 0;
+	int i, err;
 
 	for (i = 0; i < rmnet_nports; i++) {
 		err = frmnet_bind_config(c, i);
@@ -983,8 +983,10 @@ static struct android_usb_function ccid_function = {
 static int mtp_function_init(struct android_usb_function *f,
 		struct usb_composite_dev *cdev)
 {
+	struct android_dev *dev = _android_dev;
 	int ret;
 	ret = mtp_setup();
+	mtp_setup_perflock(dev->pdata->mtp_perf_lock_on?true:false);
 	return ret;
 }
 
